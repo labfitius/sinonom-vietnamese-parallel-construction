@@ -58,7 +58,7 @@ class KimHanNomClient:
             "Password": login_pwd
         }
 
-        response = self.session.post(login_url, data=payload, allow_redirects=True)
+        response = self.session.post(login_url, data=payload, allow_redirects=True, timeout=(15, 45))
         response.raise_for_status()
 
         token = self.session.cookies.get("token")
@@ -95,7 +95,7 @@ class KimHanNomClient:
             files = {"image_file": (filename, f, "image/jpeg")}
             # Temporary headers without Content-Type to allow multipart boundary generation
             headers = {"User-Agent": self.user_agent, "Authorization": f"Bearer {self.token}"}
-            response = requests.post(upload_url, headers=headers, files=files)
+            response = requests.post(upload_url, headers=headers, files=files, timeout=(15, 60))
 
         response.raise_for_status()
         res_json = response.json()
@@ -147,7 +147,7 @@ class KimHanNomClient:
             "Content-Type": "application/json"
         }
 
-        response = requests.post(ocr_url, headers=headers, json=payload)
+        response = requests.post(ocr_url, headers=headers, json=payload, timeout=(15, 95))
         response.raise_for_status()
         res_json = response.json()
 
@@ -188,7 +188,7 @@ class KimHanNomClient:
             "Content-Type": "application/json"
         }
 
-        response = requests.post(trans_url, headers=headers, json=payload)
+        response = requests.post(trans_url, headers=headers, json=payload, timeout=(15, 60))
         response.raise_for_status()
         res_json = response.json()
 

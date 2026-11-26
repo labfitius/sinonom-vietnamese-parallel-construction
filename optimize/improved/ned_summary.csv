@@ -1,0 +1,6 @@
+﻿Book,Lines,Total_Chars,Teacher_OK,Teacher_Err,Teacher_Acc_%,Improved_OK,Improved_Err,Improved_Acc_%,Delta_Acc_%,Error_Reduction_%,Fixed_OOF_Sound,Fixed_KHN_4th,Fixed_Top10_DictV2,Fixed_Fuzzy,Len_Repaired_Lines,QN_Typo_Flagged
+"Ca Trù Thể Cách, Nôm",1106,7567,7363,204,97.304,7388,179,97.634,0.33,12.25,3,2,1,18,0,39
+Nhi thap tu nu tac dien am digcoll_12920,912,6384,6240,142,97.775,6263,121,98.105,0.33,14.79,4,4,0,12,2,20
+"Thánh Du Quảng Huân Diên Nghĩa, Nôm",996,6977,6797,180,97.42,6829,148,97.879,0.459,17.78,4,3,0,25,0,30
+"Tây Du Truyên, Nôm",1104,7813,7541,275,96.482,7570,243,96.89,0.408,11.64,3,4,1,24,3,46
+OVERALL (4 BOOKS),4118,28741,27941,801,97.213,28050,691,97.596,0.383,13.73,14,13,2,79,5,135

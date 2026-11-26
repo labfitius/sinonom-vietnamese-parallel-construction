@@ -28,7 +28,8 @@ class AlignmentEvaluator:
             "mismatched_chars": v_res["mismatched_chars"],
             "similarity_pct": v_res["similarity_pct"],
             "is_valid": v_res["is_valid"],
-            "char_statuses": v_res["char_statuses"]
+            "char_statuses": v_res["char_statuses"],
+            "word_statuses": v_res.get("word_statuses", [])
         }
 
     def evaluate_dataset(self, records: List[Dict[str, Any]]) -> Dict[str, Any]:

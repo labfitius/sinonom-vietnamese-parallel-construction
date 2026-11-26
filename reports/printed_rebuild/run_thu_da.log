@@ -1,0 +1,16 @@
+C:\Users\nghoo\AppData\Local\anaconda3\Lib\site-packages\torch\nn\modules\transformer.py:385: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+Model weight C:\Users\nghoo\AppData\Local\Temp\vgg_transformer.pth exsits. Ignore download!
+Model weight C:\Users\nghoo\AppData\Local\Temp\vgg_seq2seq.pth exsits. Ignore download!
+
+=== thu_da ===
+Generated PPOCRLabel dataset in D:\User\nghonamjiwoo\Natural Language Processing\ca-tru-the-cach-nomocr\output\ThuDạLữHoàiNgâm_秋夜旅懷吟\ch: 7 images.
+Generated PPOCRLabel dataset in D:\User\nghonamjiwoo\Natural Language Processing\ca-tru-the-cach-nomocr\output\ThuDạLữHoàiNgâm_秋夜旅懷吟\vi: 0 images.
+Exported CSV to D:\User\nghonamjiwoo\Natural Language Processing\ca-tru-the-cach-nomocr\output\ThuDạLữHoàiNgâm_秋夜旅懷吟\ThuDạLữHoàiNgâm_秋夜旅懷吟.csv (137 rows).
+Exported styled XLSX to D:\User\nghonamjiwoo\Natural Language Processing\ca-tru-the-cach-nomocr\output\ThuDạLữHoàiNgâm_秋夜旅懷吟\ThuDạLữHoàiNgâm_秋夜旅懷吟.xlsx (137 rows).
+  ThuDạLữHoàiNgâm_秋夜旅懷吟: rows=137 similarity=67.82% (645/951)
+Generated PPOCRLabel dataset in D:\User\nghonamjiwoo\Natural Language Processing\ca-tru-the-cach-nomocr\output\Thụ Dạ Lữ Hoài Ngâm Khúc_Dịch\ch: 0 images.
+Generated PPOCRLabel dataset in D:\User\nghonamjiwoo\Natural Language Processing\ca-tru-the-cach-nomocr\output\Thụ Dạ Lữ Hoài Ngâm Khúc_Dịch\vi: 10 images.
+Exported CSV to D:\User\nghonamjiwoo\Natural Language Processing\ca-tru-the-cach-nomocr\output\Thụ Dạ Lữ Hoài Ngâm Khúc_Dịch\Thụ Dạ Lữ Hoài Ngâm Khúc_Dịch.csv (137 rows).
+Exported styled XLSX to D:\User\nghonamjiwoo\Natural Language Processing\ca-tru-the-cach-nomocr\output\Thụ Dạ Lữ Hoài Ngâm Khúc_Dịch\Thụ Dạ Lữ Hoài Ngâm Khúc_Dịch.xlsx (137 rows).
+  Thụ Dạ Lữ Hoài Ngâm Khúc_Dịch: rows=137 similarity=67.82% (645/951)

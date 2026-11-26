@@ -1,0 +1,13 @@
+C:\Users\nghoo\AppData\Local\anaconda3\Lib\site-packages\torch\nn\modules\transformer.py:385: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+Model weight C:\Users\nghoo\AppData\Local\Temp\vgg_transformer.pth exsits. Ignore download!
+Model weight C:\Users\nghoo\AppData\Local\Temp\vgg_seq2seq.pth exsits. Ignore download!
+
+=== te_co_hon ===
+  p001: 12 verses
+  p002: 12 verses
+  p003: 12 verses
+  p004: 12 verses
+  p005: 12 verses
+  p006: 12 verses
+  p007: 12 verses

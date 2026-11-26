@@ -96,15 +96,10 @@ class DocumentPreprocessor:
             img_path = cache_dir / img_name
 
             if not img_path.exists() or img_path.stat().st_size == 0:
-                imgs = page.get_images()
-                if imgs and len(imgs) >= 1 and idx > 0:
-                    xref = imgs[0][0]
-                    base_img = doc.extract_image(xref)
-                    with open(img_path, "wb") as f:
-                        f.write(base_img["image"])
-                else:
-                    pix = page.get_pixmap(dpi=RENDER_DPI)
-                    pix.save(str(img_path))
+                # Render every PDF page consistently at RENDER_DPI (300 DPI) as RGB JPEG
+                # so resolution and orientation strictly match the PDF page layout.
+                pix = page.get_pixmap(dpi=RENDER_DPI, alpha=False)
+                pix.save(str(img_path), jpg_quality=92)
 
             extracted.append((page_num, img_name, img_path))
 
@@ -217,25 +212,26 @@ class DocumentPreprocessor:
         r = roi_bgr[:, :, 2].astype(np.float32)
         rg = r - g
 
-        bg_r = float(np.percentile(r, 85))
-        bg_g = float(np.percentile(g, 85))
-        p5_r = float(np.percentile(r, 5))
+        # Fast 1/4-scale local adaptive background estimation (equivalent to sigma=45 at full res, 20x faster)
+        rh, rw = r.shape
+        sw, sh = max(16, rw // 4), max(16, rh // 4)
+        bg_r = cv2.resize(cv2.GaussianBlur(cv2.resize(r, (sw, sh), interpolation=cv2.INTER_AREA), (0, 0), sigmaX=11.0), (rw, rh), interpolation=cv2.INTER_LINEAR)
+        bg_g = cv2.resize(cv2.GaussianBlur(cv2.resize(g, (sw, sh), interpolation=cv2.INTER_AREA), (0, 0), sigmaX=11.0), (rw, rh), interpolation=cv2.INTER_LINEAR)
+        diff_r = bg_r - r
+        diff_g = bg_g - g
 
         if red_is_ch:
             # In Red-Nom + Blue-Quoc-Ngu books, mask_dark is thin blue/purple pen ink
-            dark_r_thresh = max(23.0, (bg_r - p5_r) * 0.21)
-            raw_dark = (((bg_r - r) > dark_r_thresh) & (rg < 15.0)) | (
-                ((bg_g - g) > 56.0) & (rg < 18.0) & ((bg_r - r) > 32.0)
+            raw_dark = ((diff_r > 24.0) & (rg < 15.0)) | (
+                (diff_g > 52.0) & (rg < 18.0) & (diff_r > 30.0)
             )
-            raw_red = (rg > 16.5) & ((bg_g - g) > 13.0)
+            raw_red = (rg > 16.5) & (diff_g > 15.0)
         else:
-            # In Black-Nom + Red-Quoc-Ngu books, mask_dark is black brush ink;
-            # use higher threshold (36.0) to completely reject grey notebook grid intersections
-            dark_r_thresh = max(36.0, (bg_r - p5_r) * 0.27)
-            raw_dark = (((bg_r - r) > dark_r_thresh) & (rg < 16.0)) | (
-                ((bg_g - g) > 62.0) & (rg < 18.0) & ((bg_r - r) > 42.0)
+            # In Black-Nom + Red-Quoc-Ngu books, mask_dark is black brush ink
+            raw_dark = ((diff_r > 36.0) & (rg < 16.0)) | (
+                (diff_g > 60.0) & (rg < 18.0) & (diff_r > 40.0)
             )
-            raw_red = (rg > 15.0) & ((bg_g - g) > 12.0)
+            raw_red = (rg > 15.0) & (diff_g > 14.0)
 
         clean_dark = cls._clean_single_ink_layer(raw_dark)
         clean_red = cls._clean_single_ink_layer(raw_red)

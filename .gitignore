@@ -47,3 +47,7 @@ kaggle_upload/
 datasets-midterm/pdf/
 *.zip
 datasets-midterm/
+# Trained weights (>100MB each) and the teacher's handwritten-book scans / work files
+models/**/*.pt
+optimize/Yale/
+optimize/_work/
